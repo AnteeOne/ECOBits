@@ -25,6 +25,7 @@
         <div class="form-group"><input class="form-control" type="email" name="email" placeholder="Email"></div>
         <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Password"></div>
         <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Log In</button></div>
+        <a href="${pageContext.request.contextPath}/register">Don't have an account?</a>
     </form>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

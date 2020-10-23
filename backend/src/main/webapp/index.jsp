@@ -30,15 +30,15 @@
         <div class="collapse navbar-collapse" id="menu">
             <ul class="nav navbar-nav flex-grow-1 justify-content-between">
                 <li class="nav-item d-none d-xs-block d-md-block" role="presentation"><a class="nav-link" href="#"><i class="fa fa-tree apple-logo"></i></a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="#">About Us</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="#">Telegram</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="">About Us</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="">Telegram</a></li>
                 <li class="nav-item" role="presentation"></li>
                 <li class="nav-item" role="presentation"></li>
                 <li class="nav-item" role="presentation"></li>
                 <li class="nav-item" role="presentation"></li>
                 <li class="nav-item" role="presentation"></li>
                 <li class="nav-item d-none d-xs-block d-md-block" role="presentation"></li>
-                <li class="nav-item d-none d-xs-block d-md-block" role="presentation"><a class="nav-link" href="login.html"><i class="fas fa-fingerprint"></i></a></li>
+                <li class="nav-item d-none d-xs-block d-md-block" role="presentation"><a class="nav-link" href="${pageContext.request.contextPath}/login"><i class="fas fa-fingerprint"></i></a></li>
             </ul>
         </div>
     </div>

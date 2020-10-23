@@ -5,12 +5,13 @@ import tech.anteeone.ecobits.ConfigReposytory;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 
 public class DBConnector {
 
     private Connection connection = null;
 
-    public Connection getConnection() {
+    public Connection getConnection() throws SQLException, ClassNotFoundException {
         try {
             Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(ConfigReposytory.dbURI,
@@ -18,10 +19,12 @@ public class DBConnector {
                                                      ConfigReposytory.dbPassword);
         }
         catch (SQLException e){
-            e.printStackTrace();
+            throw e;
+            //TODO(Write loggers)
         }
         catch (Exception e){
-            e.printStackTrace();
+            throw e;
+            //TODO(Write loggers)
         }
         return connection;
     }

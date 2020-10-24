@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UserDBService {
+public class UserRepository {
 
     private Connection con = null;
     private PreparedStatement ps = null;

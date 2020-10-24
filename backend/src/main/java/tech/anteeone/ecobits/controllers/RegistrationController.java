@@ -2,7 +2,7 @@ package tech.anteeone.ecobits.controllers;
 
 import tech.anteeone.ecobits.ConfigReposytory;
 import tech.anteeone.ecobits.models.User;
-import tech.anteeone.ecobits.services.UserDBService;
+import tech.anteeone.ecobits.services.UserRepository;
 import tech.anteeone.ecobits.services.UserSecurityService;
 import tech.anteeone.ecobits.services.UserValidator;
 
@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet("/register")
-public class RegisterServlet extends HttpServlet {
+public class RegistrationController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -31,9 +31,9 @@ public class RegisterServlet extends HttpServlet {
         User user = new User(username,email,password,password2);
 
         if(UserValidator.userIsValid(user)){
-            UserDBService userDBService = new UserDBService();
-            if(userDBService.emailIsAvailable(user)){
-                if(userDBService.userSignUp(user)){
+            UserRepository userRepository = new UserRepository();
+            if(userRepository.emailIsAvailable(user)){
+                if(userRepository.userSignUp(user)){
                     HttpSession session = req.getSession();
                     session.setAttribute("user_session",
                             UserSecurityService.generateUserSessionCode(user, ConfigReposytory.SECURITY_KEY));

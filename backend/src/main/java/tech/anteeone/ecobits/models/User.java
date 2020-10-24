@@ -33,12 +33,24 @@ public class User {
         return role;
     }
 
-    public User(String email,String username, String password, String password2) {
+    public User(String username,String email,String password, String password2) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.password2 = password2;
         this.role = RolesReposytory.volunteer;
         this.bitsCount = 0;
+    }
+
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
+    public User(String username, String email, Integer bitsCount, String role) {
+        this.username = username;
+        this.email = email;
+        this.bitsCount = bitsCount;
+        this.role = role;
     }
 }

@@ -1,7 +1,9 @@
 package tech.anteeone.ecobits.controllers;
 
+import tech.anteeone.ecobits.ConfigReposytory;
 import tech.anteeone.ecobits.models.User;
 import tech.anteeone.ecobits.services.UserDBService;
+import tech.anteeone.ecobits.services.UserSecurityService;
 import tech.anteeone.ecobits.services.UserValidator;
 
 import javax.servlet.ServletException;
@@ -9,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet("/register")
@@ -29,7 +32,17 @@ public class RegisterServlet extends HttpServlet {
 
         if(UserValidator.userIsValid(user)){
             UserDBService userDBService = new UserDBService();
-            userDBService.userSignUp(user);
+            if(userDBService.emailIsAvailable(user)){
+                if(userDBService.userSignUp(user)){
+                    HttpSession session = req.getSession();
+                    session.setAttribute("user_session",
+                            UserSecurityService.generateUserSessionCode(user, ConfigReposytory.SECURITY_KEY));
+                    session.setMaxInactiveInterval(300);
+                    //TODO:REDIRECT TO QUEST PAGE(red:success page)
+                }
+            }
+            //TODO:EMAIL IS UNAVAILABLE(red:error page)
+
         }
 
 

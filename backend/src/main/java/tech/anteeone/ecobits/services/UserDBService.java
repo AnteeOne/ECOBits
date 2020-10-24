@@ -32,9 +32,9 @@ public class UserDBService {
                 flag = true;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            //TODO(Write loggers)
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            //TODO(Write loggers)
         }
         finally {
             this.close();
@@ -60,9 +60,9 @@ public class UserDBService {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            //TODO(Write loggers)
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            //TODO(Write loggers)
         }
 
         return false;
@@ -82,9 +82,9 @@ public class UserDBService {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            //TODO(Write loggers)
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            //TODO(Write loggers)
         }
         return true;
     }
@@ -131,7 +131,7 @@ public class UserDBService {
                 con = null;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            //TODO(Write loggers)
         }
     }
 }

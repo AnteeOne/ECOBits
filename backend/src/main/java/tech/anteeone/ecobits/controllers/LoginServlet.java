@@ -34,7 +34,6 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("user_session",
                         UserSecurityService.generateUserSessionCode(user, ConfigReposytory.SECURITY_KEY));
                 session.setMaxInactiveInterval(300);
-                System.out.println(session.getAttribute("user_session"));
                 //TODO:REDIRECT TO QUEST PAGE(red:success page)
             }
             else{

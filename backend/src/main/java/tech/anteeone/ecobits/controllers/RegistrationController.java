@@ -1,10 +1,10 @@
 package tech.anteeone.ecobits.controllers;
 
-import tech.anteeone.ecobits.ConfigReposytory;
+import tech.anteeone.ecobits.repositories.ConfigRepository;
 import tech.anteeone.ecobits.models.User;
-import tech.anteeone.ecobits.services.UserRepository;
+import tech.anteeone.ecobits.repositories.UserRepository;
 import tech.anteeone.ecobits.services.UserSecurityService;
-import tech.anteeone.ecobits.services.UserValidator;
+import tech.anteeone.ecobits.services.UserValidatorService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,24 +30,35 @@ public class RegistrationController extends HttpServlet {
         String password2 = req.getParameter("password2");
         User user = new User(username,email,password,password2);
 
-        if(UserValidator.userIsValid(user)){
+        if(UserValidatorService.userIsValid(user)){
             UserRepository userRepository = new UserRepository();
             if(userRepository.emailIsAvailable(user)){
                 if(userRepository.userSignUp(user)){
                     HttpSession session = req.getSession();
                     session.setAttribute("user_session",
-                            UserSecurityService.generateUserSessionCode(user, ConfigReposytory.SECURITY_KEY));
+                            UserSecurityService.generateUserSessionCode(user, ConfigRepository.SECURITY_KEY));
                     session.setMaxInactiveInterval(300);
-                    //TODO:REDIRECT TO QUEST PAGE(red:success page)
+                    resp.sendRedirect("quests");
+
+                }
+                else{
+                    //TODO:data incorrect(red:error page)
+                    getServletContext().getRequestDispatcher("/register.jsp").forward(req,resp);
                 }
             }
             //TODO:EMAIL IS UNAVAILABLE(red:error page)
+            else{
+                getServletContext().getRequestDispatcher("/register.jsp").forward(req,resp);
+            }
 
+        }
+        else{
+            //TODO:not valid data(red:error page)
+            getServletContext().getRequestDispatcher("/register.jsp").forward(req,resp);
         }
 
 
-        //TODO:CHECK USER'S DATA
-        //TODO CHECK IF THIS EMAIL IS BUSY
+
     }
 
 }

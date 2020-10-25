@@ -1,32 +1,27 @@
-package tech.anteeone.ecobits.services;
+package tech.anteeone.ecobits.repositories;
 
-import tech.anteeone.ecobits.ConfigReposytory;
 import tech.anteeone.ecobits.models.User;
+import tech.anteeone.ecobits.services.JDBCConnectionService;
+import tech.anteeone.ecobits.services.UserSecurityService;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UserRepository {
+public class UserRepository extends Repository {
 
-    private Connection con = null;
-    private PreparedStatement ps = null;
-    private ResultSet rs = null;
 
     public boolean userSignUp(User user){
         Boolean flag = false;
         try {
-            DBConnector connector = new DBConnector();
+            JDBCConnectionService connector = new JDBCConnectionService();
             con = connector.getConnection();
             ps = con.prepareStatement("INSERT INTO users (username, email, password, bitscount, role,session_id) " +
                                         "VALUES (?,?,?,?,?,?)");
             ps.setString(1,user.getUsername());
             ps.setString(2,user.getEmail());
-            ps.setString(3,UserSecurityService.hashPassword(user.getPassword(), ConfigReposytory.SECURITY_KEY));
+            ps.setString(3, UserSecurityService.hashPassword(user.getPassword(), ConfigRepository.SECURITY_KEY));
             ps.setInt(4,user.getBitsCount());
             ps.setString(5,user.getRole());
-            ps.setString(6,UserSecurityService.generateUserSessionCode(user,ConfigReposytory.SECURITY_KEY));
+            ps.setString(6,UserSecurityService.generateUserSessionCode(user, ConfigRepository.SECURITY_KEY));
             int num = ps.executeUpdate();
             if (num == 1) {
                 flag = true;
@@ -45,7 +40,7 @@ public class UserRepository {
 
     public boolean checkUserData(User user){
         try {
-            DBConnector connector = new DBConnector();
+            JDBCConnectionService connector = new JDBCConnectionService();
             con = connector.getConnection();
             ps = con.prepareStatement("SELECT users.email," +
                                                   "users.password FROM users");
@@ -55,7 +50,7 @@ public class UserRepository {
                 String passwordSQL = rs.getString(2);
                 if(user.getEmail().equals(emailSQL) &&
                                 passwordSQL.equals(UserSecurityService.hashPassword
-                                (user.getPassword(),ConfigReposytory.SECURITY_KEY))){
+                                (user.getPassword(), ConfigRepository.SECURITY_KEY))){
                     return true;
                 }
             }
@@ -71,7 +66,7 @@ public class UserRepository {
     public boolean emailIsAvailable(User user){
         try{
             String userEmail = user.getEmail();
-            DBConnector connector = new DBConnector();
+            JDBCConnectionService connector = new JDBCConnectionService();
             con = connector.getConnection();
             ps = con.prepareStatement("SELECT users.email FROM users");
             rs = ps.executeQuery();
@@ -92,7 +87,7 @@ public class UserRepository {
     public User getUserFromSession(String session) throws NullPointerException{
 
         try {
-            DBConnector connector = new DBConnector();
+            JDBCConnectionService connector = new JDBCConnectionService();
             con = connector.getConnection();
             ps = con.prepareStatement("SELECT users.username,users.email,users.bitscount" +
                                             ",users.role,users.session_id FROM users");
@@ -133,5 +128,9 @@ public class UserRepository {
         } catch (Exception e) {
             //TODO(Write loggers)
         }
+    }
+
+    public static UserRepository getInstance(){
+        return new UserRepository();
     }
 }

@@ -1,5 +1,7 @@
 package tech.anteeone.ecobits.models;
 
+import tech.anteeone.ecobits.repositories.RolesRepository;
+
 public class User {
 
     private String username;
@@ -38,7 +40,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.password2 = password2;
-        this.role = RolesReposytory.volunteer;
+        this.role = RolesRepository.volunteer;
         this.bitsCount = 0;
     }
 
@@ -52,5 +54,15 @@ public class User {
         this.email = email;
         this.bitsCount = bitsCount;
         this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", bitsCount=" + bitsCount +
+                ", role='" + role + '\'' +
+                '}';
     }
 }

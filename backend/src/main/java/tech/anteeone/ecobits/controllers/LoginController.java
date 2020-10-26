@@ -1,6 +1,6 @@
 package tech.anteeone.ecobits.controllers;
 
-import tech.anteeone.ecobits.repositories.ConfigRepository;
+import tech.anteeone.ecobits.configs.ConfigRepository;
 import tech.anteeone.ecobits.models.User;
 import tech.anteeone.ecobits.repositories.UserRepository;
 import tech.anteeone.ecobits.services.UserSecurityService;
@@ -26,27 +26,23 @@ public class LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
+        HttpSession session = req.getSession();
         if(UserValidatorService.loginDataIsValid(email,password)){
             User user = new User(email,password);
             UserRepository dbService = new UserRepository();
             if(dbService.checkUserData(user)){
-                HttpSession session = req.getSession();
                 session.setAttribute("user_session",
                         UserSecurityService.generateUserSessionCode(user, ConfigRepository.SECURITY_KEY));
                 session.setMaxInactiveInterval(300);
-                resp.sendRedirect("quests");
+                resp.sendRedirect("home");
             }
             else{
-                //TODO:REDIRECT(red:error page)
-                HttpSession session = req.getSession();
                 session.setAttribute("error","Password or Email is incorrect");
                 session.setMaxInactiveInterval(1);
                 getServletContext().getRequestDispatcher("/login.jsp").forward(req,resp);
             }
         }
         else{
-            //TODO:REDIRECT TO SUCCESS PAGE
-            HttpSession session = req.getSession();
             session.setAttribute("error","Fields's not valid");
             session.setMaxInactiveInterval(1);
             getServletContext().getRequestDispatcher("/login.jsp").forward(req,resp);

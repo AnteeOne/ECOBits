@@ -22,6 +22,7 @@
         <div class="form-group"><input class="form-control" type="password" name="password2" placeholder="Repeat password"></div>
         <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Register</button></div>
         <a href="${pageContext.request.contextPath}/login">Already have an account?</a>
+        <div class="error-message" style="color: #cc0000"><%=session.getAttribute("error") == null ? "" : session.getAttribute("error") %></div>
     </form>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

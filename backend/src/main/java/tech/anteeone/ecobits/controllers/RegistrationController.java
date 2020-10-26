@@ -1,6 +1,6 @@
 package tech.anteeone.ecobits.controllers;
 
-import tech.anteeone.ecobits.repositories.ConfigRepository;
+import tech.anteeone.ecobits.configs.ConfigRepository;
 import tech.anteeone.ecobits.models.User;
 import tech.anteeone.ecobits.repositories.UserRepository;
 import tech.anteeone.ecobits.services.UserSecurityService;
@@ -29,31 +29,35 @@ public class RegistrationController extends HttpServlet {
         String password = req.getParameter("password");
         String password2 = req.getParameter("password2");
         User user = new User(username,email,password,password2);
+        HttpSession session = req.getSession();
 
         if(UserValidatorService.userIsValid(user)){
             UserRepository userRepository = new UserRepository();
             if(userRepository.emailIsAvailable(user)){
                 if(userRepository.userSignUp(user)){
-                    HttpSession session = req.getSession();
                     session.setAttribute("user_session",
                             UserSecurityService.generateUserSessionCode(user, ConfigRepository.SECURITY_KEY));
                     session.setMaxInactiveInterval(300);
-                    resp.sendRedirect("quests");
+                    resp.sendRedirect("home");
 
                 }
                 else{
-                    //TODO:data incorrect(red:error page)
+                    session.setAttribute("error","Fields is incorrect");
+                    session.setMaxInactiveInterval(1);
                     getServletContext().getRequestDispatcher("/register.jsp").forward(req,resp);
                 }
             }
-            //TODO:EMAIL IS UNAVAILABLE(red:error page)
+
             else{
+                session.setAttribute("error","Email is Unavailable");
+                session.setMaxInactiveInterval(1);
                 getServletContext().getRequestDispatcher("/register.jsp").forward(req,resp);
             }
 
         }
         else{
-            //TODO:not valid data(red:error page)
+            session.setAttribute("error","Field's not valid.Passwords didn't match");
+            session.setMaxInactiveInterval(1);
             getServletContext().getRequestDispatcher("/register.jsp").forward(req,resp);
         }
 

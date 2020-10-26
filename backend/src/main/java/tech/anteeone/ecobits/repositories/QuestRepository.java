@@ -6,14 +6,14 @@ import tech.anteeone.ecobits.services.JDBCConnectionService;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class QuestRepository extends Repository {
+public class QuestRepository extends Repository implements CrudRepository<Quest> {
 
-    public ArrayList getQuests(){
+    public ArrayList getAll(){
         ArrayList<Quest> list = new ArrayList();
         try {
             JDBCConnectionService connector = new JDBCConnectionService();
             con = connector.getConnection();
-            ps = con.prepareStatement("SELECT * from quests");
+            ps = con.prepareStatement("SELECT title,description,bitsreward from quests");
             rs = ps.executeQuery();
             while (rs.next()){
                 String titleSQL = rs.getString(1);
@@ -28,6 +28,49 @@ public class QuestRepository extends Repository {
             //TODO
         }
         return list;
+    }
+
+    @Override
+    public boolean create(Quest entity) {
+        try {
+            JDBCConnectionService connector = new JDBCConnectionService();
+            con = connector.getConnection();
+            ps = con.prepareStatement("INSERT INTO quests values (?,?,?)");
+            ps.setString(1,entity.getTitle());
+            ps.setString(2,entity.getDescription());
+            ps.setInt(3,entity.getBitsReward());
+            rs = ps.executeQuery();
+
+        }
+        catch (SQLException e) {
+            //TODO
+        } catch (ClassNotFoundException e) {
+            //TODO
+        }
+        return false;
+    }
+
+    @Override
+    public boolean delete(Quest entity) {
+        try {
+            JDBCConnectionService connector = new JDBCConnectionService();
+            con = connector.getConnection();
+            ps = con.prepareStatement("");
+            rs = ps.executeQuery();
+            while (rs.next()){
+            }
+        }
+        catch (SQLException e) {
+            //TODO
+        } catch (ClassNotFoundException e) {
+            //TODO
+        }
+        return false;
+    }
+
+    @Override
+    public Quest getByParameter(Object object) {
+        return null;
     }
 
     public static QuestRepository getInstance(){

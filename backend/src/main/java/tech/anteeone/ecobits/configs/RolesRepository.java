@@ -1,4 +1,4 @@
-package tech.anteeone.ecobits.repositories;
+package tech.anteeone.ecobits.configs;
 
 public interface RolesRepository {
 

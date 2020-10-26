@@ -1,5 +1,6 @@
 package tech.anteeone.ecobits.repositories;
 
+import tech.anteeone.ecobits.configs.ConfigRepository;
 import tech.anteeone.ecobits.models.User;
 import tech.anteeone.ecobits.services.JDBCConnectionService;
 import tech.anteeone.ecobits.services.UserSecurityService;

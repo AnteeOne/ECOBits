@@ -1,6 +1,6 @@
 package tech.anteeone.ecobits.models;
 
-import tech.anteeone.ecobits.repositories.RolesRepository;
+import tech.anteeone.ecobits.configs.RolesRepository;
 
 public class User {
 

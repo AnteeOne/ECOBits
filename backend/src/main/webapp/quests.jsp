@@ -1,5 +1,3 @@
-<%@ page import="tech.anteeone.ecobits.repositories.UserRepository" %>
-<%@ page import="tech.anteeone.ecobits.models.User" %>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -12,30 +10,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bungee">
     <link rel="stylesheet" href="assets/css/styles.min.css">
-    <%
-        User user = (User) new UserRepository().getUserFromSession(session.getAttribute("user_session").toString());
-    %>
 </head>
 
 <body>
-<div id="navigation-block">
-    <nav class="navbar navbar-light navbar-expand-md">
-        <div class="container-fluid"><a class="navbar-brand" style="font-family:Bungee, cursive;" href="#">ecobits</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div
-                    class="collapse navbar-collapse" id="navcol-1">
-                <ul class="nav navbar-nav">
-                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Quests</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">EcoShop</a></li>
-                </ul>
-                <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link active" href="#"><%=user.getBitsCount()%> bits</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#"><%=user.getUsername()%></a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</div>
+<c:import url="header.jsp"></c:import>
 <section style="margin-top: 50px;">
     <div class="container">
         <div class="row">
@@ -45,7 +23,9 @@
                     <div class="card-body">
                         <h4 class="card-title">${quest.title}</h4>
                         <h6 class="text-muted card-subtitle mb-2">${quest.description}</h6>
-                        <p class="card-text">${quest.bitsReward} bits</p><a class="card-link" href="#">Link</a></div>
+                        <p class="card-text">${quest.bitsReward} bits</p>
+                        <a href="login"><button type="button" class="btn btn-primary">Take a quest!</button></a>
+                    </div>
                 </div>
             </div>
             </c:forEach>

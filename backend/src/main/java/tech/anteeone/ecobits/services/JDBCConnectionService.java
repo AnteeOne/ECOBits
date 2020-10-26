@@ -1,6 +1,6 @@
 package tech.anteeone.ecobits.services;
 
-import tech.anteeone.ecobits.repositories.ConfigRepository;
+import tech.anteeone.ecobits.configs.ConfigRepository;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

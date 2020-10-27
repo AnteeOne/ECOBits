@@ -13,6 +13,7 @@
                     <li class="nav-item"><a class="nav-link" href="home">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="quests">Quests</a></li>
                     <li class="nav-item"><a class="nav-link" href="shop">EcoShop</a></li>
+                    <li class="nav-item"><a class="nav-link" href="admin">Admin</a></li>
                 </ul>
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item"><a class="nav-link active" href="#"><%=user.getBitsCount()%> bits</a></li>

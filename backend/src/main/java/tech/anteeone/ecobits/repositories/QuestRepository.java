@@ -13,13 +13,14 @@ public class QuestRepository extends Repository implements CrudRepository<Quest>
         try {
             JDBCConnectionService connector = new JDBCConnectionService();
             con = connector.getConnection();
-            ps = con.prepareStatement("SELECT title,description,bitsreward from quests");
+            ps = con.prepareStatement("SELECT id,title,description,bitsreward from quests");
             rs = ps.executeQuery();
             while (rs.next()){
-                String titleSQL = rs.getString(1);
-                String descriptionSQL = rs.getString(2);
-                Integer bitsRewardSQL = rs.getInt(3);
-                list.add(new Quest(titleSQL,descriptionSQL,bitsRewardSQL));
+                Integer idSQL = rs.getInt(1);
+                String titleSQL = rs.getString(2);
+                String descriptionSQL = rs.getString(3);
+                Integer bitsRewardSQL = rs.getInt(4);
+                list.add(new Quest(idSQL,titleSQL,descriptionSQL,bitsRewardSQL));
             }
         }
         catch (SQLException e) {
@@ -35,7 +36,7 @@ public class QuestRepository extends Repository implements CrudRepository<Quest>
         try {
             JDBCConnectionService connector = new JDBCConnectionService();
             con = connector.getConnection();
-            ps = con.prepareStatement("INSERT INTO quests values (?,?,?)");
+            ps = con.prepareStatement("INSERT INTO quests (title, description, bitsreward) values (?,?,?)");
             ps.setString(1,entity.getTitle());
             ps.setString(2,entity.getDescription());
             ps.setInt(3,entity.getBitsReward());
@@ -51,14 +52,14 @@ public class QuestRepository extends Repository implements CrudRepository<Quest>
     }
 
     @Override
-    public boolean delete(Quest entity) {
+    public boolean delete(Integer id) {
         try {
             JDBCConnectionService connector = new JDBCConnectionService();
             con = connector.getConnection();
-            ps = con.prepareStatement("");
+            ps = con.prepareStatement("DELETE FROM quests WHERE id = ?");
+            ps.setInt(1,id);
             rs = ps.executeQuery();
-            while (rs.next()){
-            }
+
         }
         catch (SQLException e) {
             //TODO

@@ -10,7 +10,9 @@ public class User {
     private String password2;
     private Integer bitsCount;
     private String role;
-
+    private Integer activeQuestId;
+    private Integer completedQuestsCount;
+    
     public String getUsername() {
         return username;
     }

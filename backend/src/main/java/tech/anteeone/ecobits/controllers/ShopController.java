@@ -16,7 +16,6 @@ public class ShopController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         req.setAttribute("orderList", ShopRepository.getInstance().getAll());
-        System.out.println(ShopRepository.getInstance().getAll().size());
         getServletContext().getRequestDispatcher("/shop.jsp").forward(req,resp);
 
     }

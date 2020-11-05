@@ -29,7 +29,7 @@
     <div class="container"><button data-toggle="collapse" class="navbar-toggler" data-target="#menu"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"><i class="la la-navicon"></i></span></button>
         <div class="collapse navbar-collapse" id="menu">
             <ul class="nav navbar-nav flex-grow-1 justify-content-between">
-                <li class="nav-item d-none d-xs-block d-md-block" role="presentation"><a class="nav-link" href="#"><i class="fa fa-tree apple-logo"></i></a></li>
+                <li class="nav-item d-none d-xs-block d-md-block" role="presentation"><a class="navbar-brand" style="font-family:Bungee, cursive;" href="#">ecobits</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="">About Us</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="">Telegram</a></li>
                 <li class="nav-item" role="presentation"></li>

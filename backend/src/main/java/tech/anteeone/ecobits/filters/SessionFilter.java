@@ -8,7 +8,8 @@ import java.io.IOException;
 
 @WebFilter({"/quests",
             "/shop",
-            "/home"})
+            "/home",
+            "/admin"})
 public class SessionFilter implements Filter {
 
     private ServletContext context;

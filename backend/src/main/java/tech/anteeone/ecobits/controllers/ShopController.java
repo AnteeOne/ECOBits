@@ -1,6 +1,7 @@
 package tech.anteeone.ecobits.controllers;
 
 import tech.anteeone.ecobits.repositories.QuestRepository;
+import tech.anteeone.ecobits.repositories.ShopRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +15,7 @@ public class ShopController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        req.setAttribute("orderList", ShopRepository.getInstance().getAll());
         getServletContext().getRequestDispatcher("/shop.jsp").forward(req,resp);
 
     }

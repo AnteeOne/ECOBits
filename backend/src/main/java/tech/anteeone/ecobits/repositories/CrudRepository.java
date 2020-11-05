@@ -8,7 +8,7 @@ public interface CrudRepository<T> {
 
     boolean create(T entity);
 
-    boolean delete(T entity);
+    boolean delete(Integer id);
 
     T getByParameter(Object object);
 

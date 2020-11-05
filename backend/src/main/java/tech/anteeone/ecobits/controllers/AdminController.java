@@ -1,7 +1,9 @@
 package tech.anteeone.ecobits.controllers;
 
+import tech.anteeone.ecobits.models.Order;
 import tech.anteeone.ecobits.models.Quest;
 import tech.anteeone.ecobits.repositories.QuestRepository;
+import tech.anteeone.ecobits.repositories.ShopRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +17,7 @@ public class AdminController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("questList", QuestRepository.getInstance().getAll());
+        req.setAttribute("orderList", ShopRepository.getInstance().getAll());
         getServletContext().getRequestDispatcher("/admin.jsp").forward(req,resp);
     }
 
@@ -33,5 +36,18 @@ public class AdminController extends HttpServlet {
             QuestRepository.getInstance().delete(Integer.valueOf(req.getParameter("questid")));
             resp.sendRedirect("admin");
         }
+        if(type.equals("deleteorder")){
+            ShopRepository.getInstance().delete(Integer.valueOf(req.getParameter("orderid")));
+            resp.sendRedirect("admin");
+        }
+        if(type.equals("addorder")){
+            String orderTitle = req.getParameter("order_title");
+            String orderText = req.getParameter("order_text");
+            Integer orderBits = Integer.valueOf(req.getParameter("order_bits"));
+            Order order = new Order(orderTitle,orderText,orderBits);
+            ShopRepository.getInstance().create(order);
+            resp.sendRedirect("admin");
+        }
+
     }
 }

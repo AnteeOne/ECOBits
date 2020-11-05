@@ -54,6 +54,44 @@
         <div style="text-align:center;">
             <h2 class="divider-style"><span>Shop Orders</span></h2>
         </div>
+
+        <div class="row articles">
+            <c:forEach var="order" items="${requestScope.get('orderList')}">
+
+                <div class="col-sm-6 col-md-4 item"><a href="#"><img class="img-fluid" src="${pageContext.request.contextPath}/assets/img/order.jpg"></a>
+                    <h4 class="card-title">${order.title}</h4>
+                    <p class="description">${order.description}</p>
+                    <form action="admin?type=deleteorder&orderid=${order.id}" name="deleteorder" method="post">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+
+            </c:forEach>
+        </div>
+
+        <div style="text-align:center;">
+            <h2 class="divider-style"><span>Add Order</span></h2>
+        </div>
+
+        <div class="create-form" style="padding: 50px">
+            <form action="admin?type=addorder" name="addorder" method="post">
+                <div class="form-group">
+                    <label for="quest_title">Title</label>
+                    <input type="text" class="form-control" id="order_title" name="order_title" placeholder="Enter title">
+                </div>
+                <div class="form-group">
+                    <label for="quest_text">Text</label>
+                    <input type="text" class="form-control" id="order_text" name="order_text" placeholder="Enter text">
+                </div>
+                <div class="form-group">
+                    <label for="quest_bits">Bits Reward</label>
+                    <input type="number" class="form-control" id="order_bits" name="order_bits" placeholder="Enter price in bits">
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="align-content: center">Submit</button>
+            </form>
+        </div>
+
     </div>
 
     <c:import url="components/scripts.jsp"></c:import>

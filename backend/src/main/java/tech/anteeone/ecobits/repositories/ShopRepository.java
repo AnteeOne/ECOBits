@@ -1,26 +1,27 @@
 package tech.anteeone.ecobits.repositories;
 
-import tech.anteeone.ecobits.models.Quest;
+import tech.anteeone.ecobits.models.Order;
 import tech.anteeone.ecobits.services.JDBCConnectionService;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class QuestRepository extends Repository implements CrudRepository<Quest> {
+public class ShopRepository extends Repository implements CrudRepository<Order>{
 
-    public ArrayList getAll(){
-        ArrayList<Quest> list = new ArrayList();
+    @Override
+    public ArrayList<Order> getAll() {
+        ArrayList<Order> list = new ArrayList();
         try {
             JDBCConnectionService connector = new JDBCConnectionService();
             con = connector.getConnection();
-            ps = con.prepareStatement("SELECT id,title,description,bitsreward from quests");
+            ps = con.prepareStatement("SELECT id,title,description,bitsprice from orders");
             rs = ps.executeQuery();
             while (rs.next()){
                 Integer idSQL = rs.getInt(1);
                 String titleSQL = rs.getString(2);
                 String descriptionSQL = rs.getString(3);
-                Integer bitsRewardSQL = rs.getInt(4);
-                list.add(new Quest(idSQL,titleSQL,descriptionSQL,bitsRewardSQL));
+                Integer bitsPriceSQL = rs.getInt(4);
+                list.add(new Order(idSQL,titleSQL,descriptionSQL,bitsPriceSQL));
             }
         }
         catch (SQLException e) {
@@ -32,16 +33,15 @@ public class QuestRepository extends Repository implements CrudRepository<Quest>
     }
 
     @Override
-    public boolean create(Quest entity) {
+    public boolean create(Order entity) {
         try {
             JDBCConnectionService connector = new JDBCConnectionService();
             con = connector.getConnection();
-            ps = con.prepareStatement("INSERT INTO quests (title, description, bitsreward) values (?,?,?)");
+            ps = con.prepareStatement("INSERT INTO orders (title, description, bitsprice) values (?,?,?)");
             ps.setString(1,entity.getTitle());
             ps.setString(2,entity.getDescription());
-            ps.setInt(3,entity.getBitsReward());
+            ps.setInt(3,entity.getBitsPrice());
             rs = ps.executeQuery();
-            return true;
 
         }
         catch (SQLException e) {
@@ -57,7 +57,7 @@ public class QuestRepository extends Repository implements CrudRepository<Quest>
         try {
             JDBCConnectionService connector = new JDBCConnectionService();
             con = connector.getConnection();
-            ps = con.prepareStatement("DELETE FROM quests WHERE id = ?");
+            ps = con.prepareStatement("DELETE FROM orders WHERE id = ?");
             ps.setInt(1,id);
             rs = ps.executeQuery();
             return true;
@@ -72,14 +72,11 @@ public class QuestRepository extends Repository implements CrudRepository<Quest>
     }
 
     @Override
-    public Quest getByParameter(Object object) {
+    public Order getByParameter(Object object) {
         return null;
     }
 
-    public static QuestRepository getInstance(){
-        return new QuestRepository();
+    public static ShopRepository getInstance() {
+        return new ShopRepository();
     }
-
-
-
 }

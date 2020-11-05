@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 public class ShopRepository extends Repository implements CrudRepository<Order>{
 
+    private static ShopRepository repository = null;
+
     @Override
     public ArrayList<Order> getAll() {
         ArrayList<Order> list = new ArrayList();
@@ -72,11 +74,13 @@ public class ShopRepository extends Repository implements CrudRepository<Order>{
     }
 
     @Override
-    public Order getByParameter(Object object) {
+    public Order getById(Integer id) {
         return null;
     }
 
+
     public static ShopRepository getInstance() {
-        return new ShopRepository();
+        if(repository == null) repository = new ShopRepository();
+        return repository;
     }
 }

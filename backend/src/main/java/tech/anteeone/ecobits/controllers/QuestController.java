@@ -2,7 +2,9 @@ package tech.anteeone.ecobits.controllers;
 
 
 
+import tech.anteeone.ecobits.models.User;
 import tech.anteeone.ecobits.repositories.QuestRepository;
+import tech.anteeone.ecobits.repositories.UserRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,6 +27,12 @@ public class QuestController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+        String type = req.getParameter("type");
+        if(type.equals("choosequest")){
+            HttpSession session = req.getSession();
+            Integer questId = Integer.valueOf(req.getParameter("questid"));
+            UserRepository.getInstance().updateUsersQuest(session.getAttribute("user_session").toString(),questId);
+            resp.sendRedirect("quests");
+        }
     }
 }

@@ -92,6 +92,23 @@
             </form>
         </div>
 
+        <div style="text-align:center;">
+            <h2 class="divider-style"><span>Active Volunteers</span></h2>
+        </div>
+
+        <div class="row">
+            <c:forEach var="user" items="${requestScope.get('usersList')}">
+            <div class="card w-50" style="margin-bottom: 5px">
+                <div class="card-body">
+                    <h5 class="card-title">user.username</h5>
+                    <a href="#" class="btn btn-primary">Give Bits</a>
+                </div>
+            </div>
+            </c:forEach>
+
+        </div>
+
+
     </div>
 
     <c:import url="components/scripts.jsp"></c:import>

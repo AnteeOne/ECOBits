@@ -27,7 +27,9 @@
                         <h4 class="card-title">${quest.title}</h4>
                         <h6 class="text-muted card-subtitle mb-2">${quest.description}</h6>
                         <p class="card-text">${quest.bitsReward} bits</p>
-                        <a href="login"><button type="button" class="btn btn-primary">Take a quest!</button></a>
+                        <form action="quests?type=choosequest&questid=${quest.id}" method="post">
+                            <a href="login"><button type="submit" class="btn btn-primary">Choose a quest!</button></a>
+                        </form>
                     </div>
                 </div>
             </div>

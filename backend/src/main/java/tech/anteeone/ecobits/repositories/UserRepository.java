@@ -6,9 +6,11 @@ import tech.anteeone.ecobits.services.JDBCConnectionService;
 import tech.anteeone.ecobits.services.UserSecurityService;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class UserRepository extends Repository {
 
+    private static UserRepository repository = null;
 
     public boolean userSignUp(User user){
         Boolean flag = false;
@@ -64,6 +66,23 @@ public class UserRepository extends Repository {
         return false;
     }
 
+    public boolean updateUsersQuest(String session,Integer questId){
+        try{
+            JDBCConnectionService connector = new JDBCConnectionService();
+            con = connector.getConnection();
+            ps = con.prepareStatement("UPDATE users SET active_quest_id = ? where session_id = ?");
+            ps.setInt(1,questId);
+            ps.setString(2,session);
+            rs = ps.executeQuery();
+            return true;
+        } catch (SQLException e) {
+            //TODO(Write loggers)
+        } catch (ClassNotFoundException e) {
+            //TODO(Write loggers)
+        }
+        return false;
+    }
+
     public boolean emailIsAvailable(User user){
         try{
             String userEmail = user.getEmail();
@@ -91,7 +110,8 @@ public class UserRepository extends Repository {
             JDBCConnectionService connector = new JDBCConnectionService();
             con = connector.getConnection();
             ps = con.prepareStatement("SELECT users.username,users.email,users.bitscount" +
-                                            ",users.role,users.session_id FROM users");
+                                            ",users.role,users.session_id," +
+                                            "users.active_quest_id,users.completed_quests_count FROM users");
             rs = ps.executeQuery();
             while (rs.next()){
                 String sessionSQL = rs.getString(5);
@@ -100,7 +120,9 @@ public class UserRepository extends Repository {
                     String emailSQL = rs.getString(2);
                     Integer bitsCountSQL = rs.getInt(3);
                     String roleSQL = rs.getString(4);
-                    return new User(usernameSQL,emailSQL,bitsCountSQL,roleSQL);
+                    Integer activeQuestIdSQL = rs.getInt(6);
+                    Integer completedQuestsCountSQL = rs.getInt(7);
+                    return new User(usernameSQL,emailSQL,bitsCountSQL,roleSQL,activeQuestIdSQL,completedQuestsCountSQL);
                 }
             }
 
@@ -110,6 +132,26 @@ public class UserRepository extends Repository {
             //TODO(Write loggers)
         }
         return null;
+    }
+
+    public ArrayList<User> getСompletedQuestUsers(){
+        ArrayList<User> list = new ArrayList();
+        try {
+            JDBCConnectionService connector = new JDBCConnectionService();
+            con = connector.getConnection();
+            ps = con.prepareStatement("SELECT users.username,users.active_quest_id from users where active_quest_id IS NOT NULL");
+            rs = ps.executeQuery();
+            while (rs.next()){
+                list.add(new User(rs.getString(1),rs.getInt(2)));
+            }
+            return list;
+        }
+        catch (SQLException e) {
+            //TODO
+        } catch (ClassNotFoundException e) {
+            //TODO
+        }
+        return list;
     }
 
     private void close() {
@@ -132,6 +174,7 @@ public class UserRepository extends Repository {
     }
 
     public static UserRepository getInstance(){
-        return new UserRepository();
+        if(repository == null) repository = new UserRepository();
+        return repository;
     }
 }

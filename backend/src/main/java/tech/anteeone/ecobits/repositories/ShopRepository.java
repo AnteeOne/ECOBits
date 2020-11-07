@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 public class ShopRepository extends Repository implements CrudRepository<Order>{
 
+    private static ShopRepository repository = null;
+
     @Override
     public ArrayList<Order> getAll() {
         ArrayList<Order> list = new ArrayList();
@@ -25,9 +27,9 @@ public class ShopRepository extends Repository implements CrudRepository<Order>{
             }
         }
         catch (SQLException e) {
-            //TODO
+            throw new IllegalStateException(e);
         } catch (ClassNotFoundException e) {
-            //TODO
+            throw new IllegalStateException(e);
         }
         return list;
     }
@@ -45,9 +47,9 @@ public class ShopRepository extends Repository implements CrudRepository<Order>{
 
         }
         catch (SQLException e) {
-            //TODO
+            throw new IllegalStateException(e);
         } catch (ClassNotFoundException e) {
-            //TODO
+            throw new IllegalStateException(e);
         }
         return false;
     }
@@ -64,19 +66,40 @@ public class ShopRepository extends Repository implements CrudRepository<Order>{
 
         }
         catch (SQLException e) {
-            //TODO
+            return false;
         } catch (ClassNotFoundException e) {
-            //TODO
+            return false;
         }
-        return false;
+
     }
 
     @Override
-    public Order getByParameter(Object object) {
+    public Order getById(Integer id) {
+        try {
+            JDBCConnectionService connector = new JDBCConnectionService();
+            con = connector.getConnection();
+            ps = con.prepareStatement("SELECT orders.id,orders.title,orders.description,orders.bitsprice from orders where id = ?");
+            ps.setInt(1,id);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                Integer idSQL = rs.getInt(1);
+                String titleSQL = rs.getString(2);
+                String descriptionSQL = rs.getString(3);
+                Integer bitsPriceSQL = rs.getInt(4);
+                return new Order(idSQL,titleSQL,descriptionSQL,bitsPriceSQL);
+            }
+        }
+        catch (SQLException e) {
+            throw new IllegalStateException(e);
+        } catch (ClassNotFoundException e) {
+            throw new IllegalStateException(e);
+        }
         return null;
     }
 
+
     public static ShopRepository getInstance() {
-        return new ShopRepository();
+        if(repository == null) repository = new ShopRepository();
+        return repository;
     }
 }

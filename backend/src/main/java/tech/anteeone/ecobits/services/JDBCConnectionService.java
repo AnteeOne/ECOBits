@@ -18,10 +18,10 @@ public class JDBCConnectionService {
                                                      ConfigRepository.DB_PASSWORD);
         }
         catch (SQLException e){
-            //TODO(Write loggers)
+            throw new IllegalStateException(e);
         }
         catch (Exception e){
-            //TODO(Write loggers)
+            throw new IllegalStateException(e);
         }
         return connection;
     }

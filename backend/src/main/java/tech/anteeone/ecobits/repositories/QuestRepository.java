@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 public class QuestRepository extends Repository implements CrudRepository<Quest> {
 
+    private static QuestRepository repository = null;
+
     public ArrayList getAll(){
         ArrayList<Quest> list = new ArrayList();
         try {
@@ -24,9 +26,9 @@ public class QuestRepository extends Repository implements CrudRepository<Quest>
             }
         }
         catch (SQLException e) {
-            //TODO
+            throw new IllegalStateException(e);
         } catch (ClassNotFoundException e) {
-            //TODO
+            throw new IllegalStateException(e);
         }
         return list;
     }
@@ -45,11 +47,11 @@ public class QuestRepository extends Repository implements CrudRepository<Quest>
 
         }
         catch (SQLException e) {
-            //TODO
+            return false;
         } catch (ClassNotFoundException e) {
-            //TODO
+            return false;
         }
-        return false;
+
     }
 
     @Override
@@ -64,21 +66,45 @@ public class QuestRepository extends Repository implements CrudRepository<Quest>
 
         }
         catch (SQLException e) {
-            //TODO
-        } catch (ClassNotFoundException e) {
-            //TODO
+            return false;
         }
-        return false;
+        catch (ClassNotFoundException e) {
+            return false;
+        }
+
     }
 
     @Override
-    public Quest getByParameter(Object object) {
+    public Quest getById(Integer id) {
+
+        try {
+            JDBCConnectionService connector = new JDBCConnectionService();
+            con = connector.getConnection();
+            ps = con.prepareStatement("SELECT id,title,description,bitsreward from quests where quests.id = ?");
+            ps.setInt(1,id);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                Integer idSQL = rs.getInt(1);
+                String titleSQL = rs.getString(2);
+                String descriptionSQL = rs.getString(3);
+                Integer bitsRewardSQL = rs.getInt(4);
+                return new Quest(idSQL,titleSQL,descriptionSQL,bitsRewardSQL);
+            }
+        }
+        catch (SQLException e) {
+            throw new IllegalStateException(e);
+        } catch (ClassNotFoundException e) {
+            throw new IllegalStateException(e);
+        }
         return null;
     }
 
+
     public static QuestRepository getInstance(){
-        return new QuestRepository();
+        if(repository == null) repository = new QuestRepository();
+        return repository;
     }
+
 
 
 

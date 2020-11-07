@@ -4,13 +4,14 @@ import java.util.ArrayList;
 
 public interface CrudRepository<T> {
 
+
     ArrayList<T> getAll();
 
     boolean create(T entity);
 
     boolean delete(Integer id);
 
-    T getByParameter(Object object);
+    T getById(Integer id);
 
 
 

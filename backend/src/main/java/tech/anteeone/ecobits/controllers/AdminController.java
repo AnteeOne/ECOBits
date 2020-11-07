@@ -4,6 +4,7 @@ import tech.anteeone.ecobits.models.Order;
 import tech.anteeone.ecobits.models.Quest;
 import tech.anteeone.ecobits.repositories.QuestRepository;
 import tech.anteeone.ecobits.repositories.ShopRepository;
+import tech.anteeone.ecobits.repositories.UserRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,6 +19,7 @@ public class AdminController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("questList", QuestRepository.getInstance().getAll());
         req.setAttribute("orderList", ShopRepository.getInstance().getAll());
+        req.setAttribute("usersList", UserRepository.getInstance().getСompletedQuestUsers());
         getServletContext().getRequestDispatcher("/admin.jsp").forward(req,resp);
     }
 
@@ -46,6 +48,12 @@ public class AdminController extends HttpServlet {
             Integer orderBits = Integer.valueOf(req.getParameter("order_bits"));
             Order order = new Order(orderTitle,orderText,orderBits);
             ShopRepository.getInstance().create(order);
+            resp.sendRedirect("admin");
+        }
+        if(type.equals("givebits")){
+            Integer id = Integer.valueOf(req.getParameter("userid"));
+            Quest quest = QuestRepository.getInstance().getById(Integer.valueOf(req.getParameter("activequestid")));
+            UserRepository.getInstance().updateUsersBits(id,quest.getBitsReward());
             resp.sendRedirect("admin");
         }
 

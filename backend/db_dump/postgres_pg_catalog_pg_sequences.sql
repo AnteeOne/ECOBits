@@ -1,3 +1,0 @@
-INSERT INTO pg_catalog.pg_sequences (schemaname, sequencename, sequenceowner, data_type, start_value, min_value, max_value, increment_by, cycle, cache_size, last_value) VALUES ('public', 'quests_id_seq', 'anteeone', integer, 1, 1, 2147483647, 1, false, 1, 20);
-INSERT INTO pg_catalog.pg_sequences (schemaname, sequencename, sequenceowner, data_type, start_value, min_value, max_value, increment_by, cycle, cache_size, last_value) VALUES ('public', 'orders_id_seq', 'anteeone', integer, 1, 1, 2147483647, 1, false, 1, 12);
-INSERT INTO pg_catalog.pg_sequences (schemaname, sequencename, sequenceowner, data_type, start_value, min_value, max_value, increment_by, cycle, cache_size, last_value) VALUES ('public', 'users_id_seq', 'anteeone', integer, 1, 1, 2147483647, 1, false, 1, 2);

@@ -1,2 +1,0 @@
-INSERT INTO public.users (username, email, password, bitscount, role, session_id, active_quest_id, completed_quests_count, id) VALUES ('FirstUser', 'firstuser@mail.ru', '134014587-968139131', 151, 'volunteer', '778713365134014587v%2jl8!@$*i$2^h!8mo@ziom2(@ace$-t-3%oo)zj4z66g+oc$', 17, 0, 2);
-INSERT INTO public.users (username, email, password, bitscount, role, session_id, active_quest_id, completed_quests_count, id) VALUES ('admin', 'admin@admin.ru', '92668751-968139131', 2342, 'admin', '-41007332592668751v%2jl8!@$*i$2^h!8mo@ziom2(@ace$-t-3%oo)zj4z66g+oc$', 8, 0, 1);

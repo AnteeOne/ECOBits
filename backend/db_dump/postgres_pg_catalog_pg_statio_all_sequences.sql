@@ -1,3 +1,0 @@
-INSERT INTO pg_catalog.pg_statio_all_sequences (relid, schemaname, relname, blks_read, blks_hit) VALUES (16863, 'public', 'quests_id_seq', 1, 22);
-INSERT INTO pg_catalog.pg_statio_all_sequences (relid, schemaname, relname, blks_read, blks_hit) VALUES (16875, 'public', 'orders_id_seq', 1, 12);
-INSERT INTO pg_catalog.pg_statio_all_sequences (relid, schemaname, relname, blks_read, blks_hit) VALUES (16915, 'public', 'users_id_seq', 1, 4);

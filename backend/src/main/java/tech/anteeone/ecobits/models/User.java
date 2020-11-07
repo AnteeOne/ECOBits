@@ -4,6 +4,8 @@ import tech.anteeone.ecobits.configs.RolesRepository;
 
 public class User {
 
+
+    private Integer id;
     private String username;
     private String email;
     private String password;
@@ -46,6 +48,8 @@ public class User {
         return role;
     }
 
+    public Integer getId() { return id; }
+
     public User(String username,String email,String password, String password2) {
         this.username = username;
         this.email = email;
@@ -70,6 +74,16 @@ public class User {
         this.password = password;
     }
 
+    public User(Integer id,String username, String email, Integer bitsCount, String role, Integer activeQuestId, Integer completedQuestsCount) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.bitsCount = bitsCount;
+        this.role = role;
+        this.activeQuestId = activeQuestId;
+        this.completedQuestsCount = completedQuestsCount;
+    }
+
     public User(String username, String email, Integer bitsCount, String role) {
         this.username = username;
         this.email = email;
@@ -77,7 +91,8 @@ public class User {
         this.role = role;
     }
 
-    public User(String username, Integer activeQuestId) {
+    public User(Integer id,String username, Integer activeQuestId) {
+        this.id = id;
         this.username = username;
         this.activeQuestId = activeQuestId;
     }

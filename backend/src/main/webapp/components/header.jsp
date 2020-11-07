@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="tech.anteeone.ecobits.repositories.UserRepository" %>
 <%@ page import="tech.anteeone.ecobits.models.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -15,11 +16,14 @@
                     <li class="nav-item"><a class="nav-link" href="home">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="quests">Quests</a></li>
                     <li class="nav-item"><a class="nav-link" href="shop">EcoShop</a></li>
-                    <li class="nav-item"><a class="nav-link" href="admin">Admin</a></li>
+                    <% if (user.getRole().equals("admin")) { %>
+                    <li class="nav-item" ><a class="nav-link" href = "admin" > Admin </a ></li >
+                    <% } %>
                 </ul>
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item"><a class="nav-link active" href="#"><%=user.getBitsCount()%> bits</a></li>
                     <li class="nav-item"><a class="nav-link" href="#"><%=user.getUsername()%></a></li>
+                    <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>">Logout</a></li>
                 </ul>
             </div>
         </div>

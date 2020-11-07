@@ -75,6 +75,25 @@ public class ShopRepository extends Repository implements CrudRepository<Order>{
 
     @Override
     public Order getById(Integer id) {
+        try {
+            JDBCConnectionService connector = new JDBCConnectionService();
+            con = connector.getConnection();
+            ps = con.prepareStatement("SELECT orders.id,orders.title,orders.description,orders.bitsprice from orders where id = ?");
+            ps.setInt(1,id);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                Integer idSQL = rs.getInt(1);
+                String titleSQL = rs.getString(2);
+                String descriptionSQL = rs.getString(3);
+                Integer bitsPriceSQL = rs.getInt(4);
+                return new Order(idSQL,titleSQL,descriptionSQL,bitsPriceSQL);
+            }
+        }
+        catch (SQLException e) {
+            //TODO
+        } catch (ClassNotFoundException e) {
+            //TODO
+        }
         return null;
     }
 

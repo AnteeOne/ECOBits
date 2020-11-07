@@ -8,7 +8,7 @@
 <body>
     <c:import url="components/header.jsp"></c:import>
 
-    <div class="container">
+    <div class="container" style="margin-bottom: 50px">
         <div style="text-align:center;">
             <h2 class="divider-style"><span>Quests</span></h2>
         </div>
@@ -96,12 +96,14 @@
             <h2 class="divider-style"><span>Active Volunteers</span></h2>
         </div>
 
-        <div class="row">
+        <div class="row" style="display: flex;justify-content: center">
             <c:forEach var="user" items="${requestScope.get('usersList')}">
-            <div class="card w-50" style="margin-bottom: 5px">
+            <div class="card w-50" style="margin: 5px">
                 <div class="card-body">
-                    <h5 class="card-title">user.username</h5>
-                    <a href="#" class="btn btn-primary">Give Bits</a>
+                    <h5 class="card-title">${user.username}</h5>
+                    <form action="admin?type=givebits&userid=${user.id}&activequestid=${user.activeQuestId}"method="post">
+                        <button type="submit" class="btn btn-primary">Give Bits</button>
+                    </form>
                 </div>
             </div>
             </c:forEach>

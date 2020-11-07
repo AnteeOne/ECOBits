@@ -50,6 +50,12 @@ public class AdminController extends HttpServlet {
             ShopRepository.getInstance().create(order);
             resp.sendRedirect("admin");
         }
+        if(type.equals("givebits")){
+            Integer id = Integer.valueOf(req.getParameter("userid"));
+            Quest quest = QuestRepository.getInstance().getById(Integer.valueOf(req.getParameter("activequestid")));
+            UserRepository.getInstance().updateUsersBits(id,quest.getBitsReward());
+            resp.sendRedirect("admin");
+        }
 
     }
 }

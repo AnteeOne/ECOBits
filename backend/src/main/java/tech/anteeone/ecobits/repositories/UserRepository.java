@@ -30,9 +30,9 @@ public class UserRepository extends Repository {
                 flag = true;
             }
         } catch (SQLException e) {
-            //TODO(Write loggers)
+            throw new IllegalStateException(e);
         } catch (ClassNotFoundException e) {
-            //TODO(Write loggers)
+            throw new IllegalStateException(e);
         }
         finally {
             this.close();
@@ -58,9 +58,9 @@ public class UserRepository extends Repository {
                 }
             }
         } catch (SQLException e) {
-            //TODO(Write loggers)
+            throw new IllegalStateException(e);
         } catch (ClassNotFoundException e) {
-            //TODO(Write loggers)
+            throw new IllegalStateException(e);
         }
 
         return false;
@@ -76,11 +76,11 @@ public class UserRepository extends Repository {
             rs = ps.executeQuery();
             return true;
         } catch (SQLException e) {
-            //TODO(Write loggers)
+            return false;
         } catch (ClassNotFoundException e) {
-            //TODO(Write loggers)
+            return false;
         }
-        return false;
+
     }
 
     public boolean updateUsersBits(Integer id,Integer bitsCount){
@@ -93,11 +93,11 @@ public class UserRepository extends Repository {
             rs = ps.executeQuery();
             return true;
         } catch (SQLException e) {
-            //TODO(Write loggers)
+            return false;
         } catch (ClassNotFoundException e) {
-            //TODO(Write loggers)
+            return false;
         }
-        return false;
+
     }
 
     public boolean emailIsAvailable(User user){
@@ -114,9 +114,9 @@ public class UserRepository extends Repository {
                 }
             }
         } catch (SQLException e) {
-            //TODO(Write loggers)
+            throw new IllegalStateException(e);
         } catch (ClassNotFoundException e) {
-            //TODO(Write loggers)
+            throw new IllegalStateException(e);
         }
         return true;
     }
@@ -145,9 +145,9 @@ public class UserRepository extends Repository {
             }
 
         } catch (SQLException e) {
-            //TODO(Write loggers)
+            throw new IllegalStateException(e);
         } catch (ClassNotFoundException e) {
-            //TODO(Write loggers)
+            throw new IllegalStateException(e);
         }
         return null;
     }
@@ -165,11 +165,11 @@ public class UserRepository extends Repository {
             return list;
         }
         catch (SQLException e) {
-            //TODO
+            return list;
         } catch (ClassNotFoundException e) {
-            //TODO
+            return list;
         }
-        return list;
+
     }
 
     private void close() {
@@ -187,7 +187,7 @@ public class UserRepository extends Repository {
                 con = null;
             }
         } catch (Exception e) {
-            //TODO(Write loggers)
+            throw new IllegalStateException(e);
         }
     }
 

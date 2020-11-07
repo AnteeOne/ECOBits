@@ -26,9 +26,9 @@ public class QuestRepository extends Repository implements CrudRepository<Quest>
             }
         }
         catch (SQLException e) {
-            //TODO
+            throw new IllegalStateException(e);
         } catch (ClassNotFoundException e) {
-            //TODO
+            throw new IllegalStateException(e);
         }
         return list;
     }
@@ -47,11 +47,11 @@ public class QuestRepository extends Repository implements CrudRepository<Quest>
 
         }
         catch (SQLException e) {
-            //TODO
+            return false;
         } catch (ClassNotFoundException e) {
-            //TODO
+            return false;
         }
-        return false;
+
     }
 
     @Override
@@ -66,11 +66,12 @@ public class QuestRepository extends Repository implements CrudRepository<Quest>
 
         }
         catch (SQLException e) {
-            //TODO
-        } catch (ClassNotFoundException e) {
-            //TODO
+            return false;
         }
-        return false;
+        catch (ClassNotFoundException e) {
+            return false;
+        }
+
     }
 
     @Override
@@ -91,9 +92,9 @@ public class QuestRepository extends Repository implements CrudRepository<Quest>
             }
         }
         catch (SQLException e) {
-            //TODO
+            throw new IllegalStateException(e);
         } catch (ClassNotFoundException e) {
-            //TODO
+            throw new IllegalStateException(e);
         }
         return null;
     }

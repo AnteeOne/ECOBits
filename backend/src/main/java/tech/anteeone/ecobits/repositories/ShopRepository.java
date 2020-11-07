@@ -27,9 +27,9 @@ public class ShopRepository extends Repository implements CrudRepository<Order>{
             }
         }
         catch (SQLException e) {
-            //TODO
+            throw new IllegalStateException(e);
         } catch (ClassNotFoundException e) {
-            //TODO
+            throw new IllegalStateException(e);
         }
         return list;
     }
@@ -47,9 +47,9 @@ public class ShopRepository extends Repository implements CrudRepository<Order>{
 
         }
         catch (SQLException e) {
-            //TODO
+            throw new IllegalStateException(e);
         } catch (ClassNotFoundException e) {
-            //TODO
+            throw new IllegalStateException(e);
         }
         return false;
     }
@@ -66,11 +66,11 @@ public class ShopRepository extends Repository implements CrudRepository<Order>{
 
         }
         catch (SQLException e) {
-            //TODO
+            return false;
         } catch (ClassNotFoundException e) {
-            //TODO
+            return false;
         }
-        return false;
+
     }
 
     @Override
@@ -90,9 +90,9 @@ public class ShopRepository extends Repository implements CrudRepository<Order>{
             }
         }
         catch (SQLException e) {
-            //TODO
+            throw new IllegalStateException(e);
         } catch (ClassNotFoundException e) {
-            //TODO
+            throw new IllegalStateException(e);
         }
         return null;
     }

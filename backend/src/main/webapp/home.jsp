@@ -47,14 +47,28 @@
                 </div>
 
                 <div class="progress" style="height: 20px;margin-top: 10px">
-                <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar" style="width: 75%">Support Level</div>
+                    <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar" style="width: 75%">Support Level</div>
+                    </div>
+                 </div>
             </div>
-        </div>
 
+            <div class="card text-center" style="margin-top: 30px;margin-bottom: 50px">
 
+                <div class="card-header">
+                    <h2>My Achievements</h2>
+                </div>
 
+                    <div class="card-body" style="display: flex;justify-content: center">
+                        <c:forEach var="achieve" items="${requestScope.get('achievementsList')}">
+                        <div class="card w-50" style="margin: 2px">
+                            <div class="card-body">
+                                <h5 class="card-title">${achieve.title}</h5>
+                            </div>
+                        </div>
+                        </c:forEach>
+                    </div>
+            </div>
 
-        </div>
 
         </div>
 

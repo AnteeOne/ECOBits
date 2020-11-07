@@ -1,0 +1,5 @@
+INSERT INTO information_schema.domain_udt_usage (udt_catalog, udt_schema, udt_name, domain_catalog, domain_schema, domain_name) VALUES ('postgres', 'pg_catalog', 'name', 'postgres', 'information_schema', 'sql_identifier');
+INSERT INTO information_schema.domain_udt_usage (udt_catalog, udt_schema, udt_name, domain_catalog, domain_schema, domain_name) VALUES ('postgres', 'pg_catalog', 'int4', 'postgres', 'information_schema', 'cardinal_number');
+INSERT INTO information_schema.domain_udt_usage (udt_catalog, udt_schema, udt_name, domain_catalog, domain_schema, domain_name) VALUES ('postgres', 'pg_catalog', 'varchar', 'postgres', 'information_schema', 'character_data');
+INSERT INTO information_schema.domain_udt_usage (udt_catalog, udt_schema, udt_name, domain_catalog, domain_schema, domain_name) VALUES ('postgres', 'pg_catalog', 'varchar', 'postgres', 'information_schema', 'yes_or_no');
+INSERT INTO information_schema.domain_udt_usage (udt_catalog, udt_schema, udt_name, domain_catalog, domain_schema, domain_name) VALUES ('postgres', 'pg_catalog', 'timestamptz', 'postgres', 'information_schema', 'time_stamp');

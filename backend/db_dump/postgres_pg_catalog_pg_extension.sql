@@ -1,0 +1,2 @@
+INSERT INTO pg_catalog.pg_extension (oid, extname, extowner, extnamespace, extrelocatable, extversion, extconfig, extcondition) VALUES (13352, 'plpgsql', 10, 11, false, '1.0', null, null);
+INSERT INTO pg_catalog.pg_extension (oid, extname, extowner, extnamespace, extrelocatable, extversion, extconfig, extcondition) VALUES (16384, 'adminpack', 10, 11, false, '2.0', null, null);

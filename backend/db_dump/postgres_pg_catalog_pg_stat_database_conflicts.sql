@@ -1,0 +1,4 @@
+INSERT INTO pg_catalog.pg_stat_database_conflicts (datid, datname, confl_tablespace, confl_lock, confl_snapshot, confl_bufferpin, confl_deadlock) VALUES (13366, 'postgres', 0, 0, 0, 0, 0);
+INSERT INTO pg_catalog.pg_stat_database_conflicts (datid, datname, confl_tablespace, confl_lock, confl_snapshot, confl_bufferpin, confl_deadlock) VALUES (1, 'template1', 0, 0, 0, 0, 0);
+INSERT INTO pg_catalog.pg_stat_database_conflicts (datid, datname, confl_tablespace, confl_lock, confl_snapshot, confl_bufferpin, confl_deadlock) VALUES (13365, 'template0', 0, 0, 0, 0, 0);
+INSERT INTO pg_catalog.pg_stat_database_conflicts (datid, datname, confl_tablespace, confl_lock, confl_snapshot, confl_bufferpin, confl_deadlock) VALUES (16395, 'itishub', 0, 0, 0, 0, 0);
